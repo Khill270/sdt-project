@@ -14,7 +14,7 @@ except UnicodeDecodeError as e:
 st.header('Exploring NBA Player Stats')
 
 if st.checkbox('Show Advanced Stats'):
-  fig_hist = px.histogram(df, x='PTS', title='Points per Game Distribution')
+    fig_hist = px.histogram(df, x='PTS', title='Points per Game Distribution')
     st.plotly_chart(fig_hist)
-  fig_scatter = px.scatter(df, x='AST', y='TRB', color='Pos', hover_name='Player', title='Assists vs. Rebounds')
+    fig_scatter = px.scatter(df, x='AST', y='TRB', color='Pos', hover_name='Player', title='Assists vs. Rebounds')
     st.plotly_chart(fig_scatter)
