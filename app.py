@@ -11,6 +11,14 @@ try:
 except UnicodeDecodeError as e:
     print(f"UnicodeDecodeError: {e}")
 
+nba_stats_df = nba_stats_df[nba_stats_df['PTS'] >= 15]
+nba_stats_df = nba_stats_df[nba_stats_df['G'] >= 60]
+
+columns_to_keep = ['Player', 'Pos', 'Age', 'Tm', 'G', 'FG%', 'TRB', 'AST', 'PTS', 'STL', 'BLK']
+nba_stats_df = nba_stats_df[columns_to_keep]
+
+nba_stats_df['Player'] = nba_stats_df['Player'].str.replace('?', 'c')
+
 st.header('Exploring NBA Player Stats')
 
 fig_hist = px.histogram(nba_stats_df, x='PTS', title='Points per Game Distribution')
