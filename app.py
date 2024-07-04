@@ -21,7 +21,14 @@ nba_stats_df['Player'] = nba_stats_df['Player'].str.replace('?', 'c')
 
 st.header('Exploring NBA Player Stats')
 
-fig_hist = px.histogram(nba_stats_df, x='PTS', title='Points per Game Distribution')
-st.plotly_chart(fig_hist)
-fig_scatter = px.scatter(nba_stats_df, x='AST', y='TRB', color='Pos', hover_name='Player', title='Assists vs. Rebounds')
-st.plotly_chart(fig_scatter)
+show_advanced_stats = st.checkbox('Show Advanced Stats')
+
+if show_advanced_stats:
+    # Plotting histograms and scatter plots with Plotly Express
+    fig_hist = px.histogram(nba_stats_df, x='PTS', title='Points per Game Distribution')
+    st.plotly_chart(fig_hist)
+
+    fig_scatter = px.scatter(nba_stats_df, x='AST', y='TRB', color='Pos', hover_name='Player', title='Assists vs. Rebounds')
+    st.plotly_chart(fig_scatter)
+else:
+    st.write("Check the box to show advanced stats.")
