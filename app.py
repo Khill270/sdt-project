@@ -32,3 +32,6 @@ if show_advanced_stats:
     st.plotly_chart(fig_scatter)
 else:
     st.write("Check the box to show advanced stats.")
+
+st.subheader('Player Stats Table')
+st.dataframe(nba_stats_df)
