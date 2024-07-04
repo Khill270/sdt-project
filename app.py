@@ -7,18 +7,17 @@ encoding = 'latin-1'
 
 try:
     nba_stats_df = pd.read_csv(filename, encoding=encoding, delimiter=';')
-    st.write(nba_stats_df.head(10))  # Use st.write instead of print for Streamlit
+    print(nba_stats_df.head(10))
 except UnicodeDecodeError as e:
-    st.error(f"UnicodeDecodeError: {e}")
+    print(f"UnicodeDecodeError: {e}")
 
-nba_stats_df = nba_stats_df[(nba_stats_df['PTS'] >= 15) & (nba_stats_df['G'] >= 60)]
+nba_stats_df = nba_stats_df[nba_stats_df['PTS'] >= 15]
+nba_stats_df = nba_stats_df[nba_stats_df['G'] >= 60]
 
 columns_to_keep = ['Player', 'Pos', 'Age', 'Tm', 'G', 'FG%', 'TRB', 'AST', 'PTS', 'STL', 'BLK']
 nba_stats_df = nba_stats_df[columns_to_keep]
 
 nba_stats_df['Player'] = nba_stats_df['Player'].str.replace('?', 'c')
-
-nba_stats_df['Player'] = nba_stats_df['Player'].astype(str)
 
 st.header('Exploring NBA Player Stats')
 
@@ -32,9 +31,3 @@ if show_advanced_stats:
     st.plotly_chart(fig_scatter)
 else:
     st.write("Check the box to show advanced stats.")
-
-st.subheader('Player Stats Table')
-
-nba_stats_df['Tm'] = nba_stats_df['Tm'].astype(str)  # Example: Convert Tm to string if necessary
-
-st.dataframe(nba_stats_df)
