@@ -34,4 +34,7 @@ else:
     st.write("Check the box to show advanced stats.")
 
 st.subheader('Player Stats Table')
+
+nba_stats_df['Tm'] = nba_stats_df['Tm'].astype(str)  # Example: Convert Tm to string if necessary
+
 st.dataframe(nba_stats_df)
