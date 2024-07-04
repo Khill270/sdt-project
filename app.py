@@ -19,12 +19,13 @@ nba_stats_df = nba_stats_df[columns_to_keep]
 
 nba_stats_df['Player'] = nba_stats_df['Player'].str.replace('?', 'c')
 
+nba_stats_df['Player'] = nba_stats_df['Player'].astype(str)
+
 st.header('Exploring NBA Player Stats')
 
 show_advanced_stats = st.checkbox('Show Advanced Stats')
 
 if show_advanced_stats:
-    # Plotting histograms and scatter plots with Plotly Express
     fig_hist = px.histogram(nba_stats_df, x='PTS', title='Points per Game Distribution')
     st.plotly_chart(fig_hist)
 
