@@ -7,12 +7,11 @@ encoding = 'latin-1'
 
 try:
     nba_stats_df = pd.read_csv(filename, encoding=encoding, delimiter=';')
-    print(nba_stats_df.head(10))
+    st.write(nba_stats_df.head(10))  # Use st.write instead of print for Streamlit
 except UnicodeDecodeError as e:
-    print(f"UnicodeDecodeError: {e}")
+    st.error(f"UnicodeDecodeError: {e}")
 
-nba_stats_df = nba_stats_df[nba_stats_df['PTS'] >= 15]
-nba_stats_df = nba_stats_df[nba_stats_df['G'] >= 60]
+nba_stats_df = nba_stats_df[(nba_stats_df['PTS'] >= 15) & (nba_stats_df['G'] >= 60)]
 
 columns_to_keep = ['Player', 'Pos', 'Age', 'Tm', 'G', 'FG%', 'TRB', 'AST', 'PTS', 'STL', 'BLK']
 nba_stats_df = nba_stats_df[columns_to_keep]
